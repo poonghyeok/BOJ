@@ -1,6 +1,7 @@
 package sep06;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,9 +13,9 @@ public class Baek10815_2209906 {
 
     //Generator
     public Baek10815_2209906(){
-        this.cardList = new ArrayList<>();
-        this.tryList = new ArrayList<>();
-        this.resultList = new ArrayList<>();
+        this.cardList = new LinkedList<>();
+        this.tryList = new LinkedList<>();
+        this.resultList = new LinkedList<>();
         this.sc = new Scanner(System.in);
     }
     //
@@ -65,9 +66,6 @@ public class Baek10815_2209906 {
             }
         }
     }
-
-
-
     //
 
     public void toStringResultList(){
@@ -76,16 +74,27 @@ public class Baek10815_2209906 {
         }
     }
 
+//    public void printResult(){
+//        for(int i = 0; i < this.getTryNum(); i++){
+//            int tryEle = this.getTryList().get(i);
+//            if(this.getCardList().indexOf(tryEle) > -1){
+//                System.out.print(1+" ");
+//            }else{
+//                System.out.print(0+" ");
+//            }
+//        }
+//    }
     public void mainProcess(){
-        System.out.println("card num : ");
+//        System.out.println("card num : ");
         this.setCardNum();
-        System.out.println("card list : ");
+//        System.out.println("card list : ");
         this.setCardList();
-        System.out.println("try num : ");
+//        System.out.println("try num : ");
         this.setTryNum();
-        System.out.println("try list : ");
+//        System.out.println("try list : ");
         this.setTryList();
-        System.out.println("\n 결과 : ");
+//        System.out.println("\n 결과 : ");
+//        this.printResult();
         this.setResultList();
         this.toStringResultList();
     }
