@@ -22,7 +22,7 @@ public class Baek10815_2209906 {
         int cardNum = sc.nextInt();
         this.cardNum = cardNum;
     }
-    public int getCardNum() {   
+    public int getCardNum() {
         return this.cardNum;
     }
     public void setTryNum(){
