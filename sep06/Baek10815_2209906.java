@@ -1,21 +1,18 @@
 package sep06;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Baek10815_2209906 {
 
     private int cardNum, tryNum;
-    private List<Integer> cardList, tryList, resultList;
+    private Map<Integer, Integer> cardList, tryList, resultList;
     private Scanner sc;
 
     //Generator
     public Baek10815_2209906(){
-        this.cardList = new LinkedList<>();
-        this.tryList = new LinkedList<>();
-        this.resultList = new LinkedList<>();
+        this.cardList = new HashMap<>();
+        this.tryList = new HashMap<>();
+        this.resultList = new HashMap<>();
         this.sc = new Scanner(System.in);
     }
     //
@@ -25,7 +22,7 @@ public class Baek10815_2209906 {
         int cardNum = sc.nextInt();
         this.cardNum = cardNum;
     }
-    public int getCardNum() {
+    public int getCardNum() {   
         return this.cardNum;
     }
     public void setTryNum(){
@@ -38,52 +35,35 @@ public class Baek10815_2209906 {
 
     public void setCardList(){
         for(int i = 0 ; i < this.getCardNum(); i++){
-            this.cardList.add(sc.nextInt());
+            this.cardList.put(sc.nextInt(), 1);
         }
     }
 
-    public List<Integer> getCardList(){
+    public Map<Integer, Integer> getCardList(){
         return this.cardList;
     }
 
     public void setTryList(){
         for(int i = 0 ; i < this.getTryNum(); i++){
-            this.tryList.add(sc.nextInt());
+            this.tryList.put(i, sc.nextInt());
         }
     }
 
-    public List<Integer> getTryList(){
+    public Map<Integer, Integer> getTryList(){
         return this.tryList;
     }
 
-    public void setResultList(){
+    public void printResult(){
         for(int i = 0; i < this.getTryNum(); i++){
             int tryEle = this.getTryList().get(i);
-            if(this.getCardList().indexOf(tryEle) > -1){
-                this.resultList.add(1);
+            Optional<Integer> optional = Optional.ofNullable(this.getCardList().get(tryEle));
+            if(optional.isPresent()){
+                System.out.print(1+" ");
             }else{
-                this.resultList.add(0);
+                System.out.print(0+" ");
             }
         }
     }
-    //
-
-    public void toStringResultList(){
-        for(int i = 0; i < this.getTryNum(); i++){
-            System.out.print(this.resultList.get(i)+" ");
-        }
-    }
-
-//    public void printResult(){
-//        for(int i = 0; i < this.getTryNum(); i++){
-//            int tryEle = this.getTryList().get(i);
-//            if(this.getCardList().indexOf(tryEle) > -1){
-//                System.out.print(1+" ");
-//            }else{
-//                System.out.print(0+" ");
-//            }
-//        }
-//    }
     public void mainProcess(){
 //        System.out.println("card num : ");
         this.setCardNum();
@@ -94,25 +74,11 @@ public class Baek10815_2209906 {
 //        System.out.println("try list : ");
         this.setTryList();
 //        System.out.println("\n 결과 : ");
-//        this.printResult();
-        this.setResultList();
-        this.toStringResultList();
+        this.printResult();
     }
 
     public static void main(String[] args){
         Baek10815_2209906 me = new Baek10815_2209906();
         me.mainProcess();
-//        Scanner scTmp = new Scanner(System.in);
-//        List<Integer> listTmp = new ArrayList<>();
-//        int numtemp = 0;
-//        System.out.println("num : ");
-//        numtemp = scTmp.nextInt();
-//        System.out.println("card list : ");
-//        for(int i = 0; i < numtemp; i++){
-//            listTmp.add(scTmp.nextInt());
-//        }
-//        for(int i = 0; i < numtemp; i++){
-//            System.out.print(listTmp.get(i)+" ");
-//        }
     }
 }
