@@ -15,8 +15,7 @@ public class Boj10816_220907 {
     //Generator
     public Boj10816_220907(){
         this.callMap = new HashMap<>();
-        this.cardMap = new HashMap<>();
-        this.cardKeyList = new HashMap<>();
+        this.cardMap = new LinkedHashMap<>();
         this.sc = new Scanner(System.in);
         this.mainProcess();
     }
@@ -53,16 +52,11 @@ public class Boj10816_220907 {
         for(int i = 0 ; i < this.getCardNum(); i++){
             int inputNum = sc.nextInt();
             this.cardMap.put(inputNum, 0);
-            this.cardKeyList.put(i, inputNum);
         }
     }
 
     public Map<Integer, Integer> getCardMap() {
-        return cardMap;
-    }
-
-    public Map<Integer, Integer> getCardKeyList(){
-        return this.cardKeyList;
+        return this.cardMap;
     }
     //
 
@@ -78,10 +72,12 @@ public class Boj10816_220907 {
             }
         }
 
-        for(int i = 0 ; i < this.getCardNum(); i++){
-            int cardKey = this.getCardKeyList().get(i);
-            System.out.print(this.getCardMap().get(cardKey)+" ");
+        Iterator<Integer> cardMapKeyIter = this.getCardMap().keySet().iterator();
+        while(cardMapKeyIter.hasNext()){
+            int key = cardMapKeyIter.next();
+            System.out.print(this.getCardMap().get(key)+" ");
         }
+
     }
 
     public void mainProcess(){
