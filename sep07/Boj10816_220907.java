@@ -1,6 +1,5 @@
 package sep07;
 
-import javax.swing.text.html.Option;
 import java.util.*;
 
 public class Boj10816_220907 {
@@ -8,8 +7,7 @@ public class Boj10816_220907 {
     //Declaration
     private int callNum, cardNum;
 
-    private Map<Integer, Integer> callMap, cardMap;
-    private List<Integer> cardKeyList;
+    private Map<Integer, Integer> callMap, cardMap, cardKeyList;
 
     private Scanner sc;
     //
@@ -18,7 +16,7 @@ public class Boj10816_220907 {
     public Boj10816_220907(){
         this.callMap = new HashMap<>();
         this.cardMap = new HashMap<>();
-        this.cardKeyList = new ArrayList<>();
+        this.cardKeyList = new HashMap<>();
         this.sc = new Scanner(System.in);
         this.mainProcess();
     }
@@ -55,7 +53,7 @@ public class Boj10816_220907 {
         for(int i = 0 ; i < this.getCardNum(); i++){
             int inputNum = sc.nextInt();
             this.cardMap.put(inputNum, 0);
-            this.cardKeyList.add(inputNum);
+            this.cardKeyList.put(i, inputNum);
         }
     }
 
@@ -63,7 +61,7 @@ public class Boj10816_220907 {
         return cardMap;
     }
 
-    public List<Integer> getCardKeyList(){
+    public Map<Integer, Integer> getCardKeyList(){
         return this.cardKeyList;
     }
     //
