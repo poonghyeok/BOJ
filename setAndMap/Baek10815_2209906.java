@@ -1,4 +1,4 @@
-package sep06;
+package setAndMap;
 
 import java.util.*;
 

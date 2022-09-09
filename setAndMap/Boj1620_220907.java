@@ -1,4 +1,4 @@
-package sep07;
+package setAndMap;
 
 import java.util.HashMap;
 import java.util.Map;
