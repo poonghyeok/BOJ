@@ -67,7 +67,6 @@ public class Boj1764_220908 {
             //setN의 size가 더 작은 경우
 
             this.setIter = this.getHashSetN().iterator();
-            this.getHashSetN().isEmpty()
             while(setIter.hasNext()){
                 String word = setIter.next();
                 if(this.getHashSetM().contains(word)){
@@ -110,7 +109,7 @@ public class Boj1764_220908 {
     public static void main(String[] args){
         Boj1764_220908 me = new Boj1764_220908();
         Set<String> testSet = new LinkedHashSet<>();
-//        List<String> testList = new ArrayList<>();
-//        Collection<String> col = testSet;
+
+        //        Collection<String> col = testSet;
     }
 }
