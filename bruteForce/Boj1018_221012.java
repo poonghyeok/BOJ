@@ -106,23 +106,44 @@ public class Boj1018_221012 {
         int maxStartRowIdx = this.getMat().length - 8;
         int maxStartColIdx = this.getMat()[0].length - 8;
         int minPaintNum = -1;
+        int minSwitchPaintNum = -1;
 
         for(int k = 0; k <= maxStartRowIdx; k++){
             for(int m = 0; m <= maxStartColIdx; m++){
                 char[][] matTemp =  getPartMatrix(k, m);
+                char[][] switchMatTemp = getPartMatrix(k, m);
+                switchMatTemp[0][0] = switchColor(switchMatTemp[0][0]);
 
                 if(k == 0 && m == 0){
                     minPaintNum = checkNumPaint(matTemp);
+                    minSwitchPaintNum = checkNumPaint(switchMatTemp)+1;
                 }else{
                     int paintNum = checkNumPaint(matTemp);
+                    int switchPaintNum = checkNumPaint(switchMatTemp)+1;
                     if(paintNum < minPaintNum){
                         minPaintNum = paintNum;
                     }
+                    if(switchPaintNum < minSwitchPaintNum){
+                        minSwitchPaintNum = switchPaintNum;
+                    }
+
                 }
             }
         }
 
+        if(minPaintNum > minSwitchPaintNum){
+            minPaintNum = minSwitchPaintNum;
+        }
+
         System.out.print(minPaintNum);
+    }
+
+    public char switchColor(char color){
+        if(color == 'B'){
+            return 'W';
+        }else{
+            return 'B';
+        }
     }
 
     public char[][] getPartMatrix(int startIdx, int endIdx){
