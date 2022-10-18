@@ -112,6 +112,7 @@ public class Boj1181_221017 {
             list.add(str);
         }else{
             for(int j = 0; j <= initSize; j++){
+                //list에 존재하는 모든 데이터와 비교해도 continue만 나왔다면 마지막에 add해주면 된다.
                 if(j == initSize){
                     list.add(str);
                     break;
