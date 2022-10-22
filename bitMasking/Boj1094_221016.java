@@ -18,7 +18,7 @@ public class Boj1094_221016 {
     public void setLength(){
         this.legnth = this.sc.nextInt();
     }
-    public int getLegnth(){
+    public int getLegnth() {
         return this.legnth;
     }
 
