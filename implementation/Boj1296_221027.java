@@ -89,9 +89,15 @@ public class Boj1296_221027 {
                     bestRate = winRate;
                     best = candi;
                 }else if(winRate == bestRate){
-                    if(compareStr(candi, best) == -1){
+                    int compareResult = compareStr(candi, best);
+                    if(compareResult == -1){
                         best = candi;
                         bestRate = winRate;
+                    }else if(compareResult == 0){
+                        if(candi.length() < best.length()){
+                            best = candi;
+                            bestRate = winRate;
+                        }
                     }
                 }
             }
