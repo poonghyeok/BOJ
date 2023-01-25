@@ -35,10 +35,14 @@ public class Boj1004_230120 {
         this.br = new BufferedReader(new InputStreamReader(System.in));
         init();
         for (int i = 0; i < this.testCase; i++) {
-            String[] coordArr = this.br.readLine().split(" ");
+
+
+            String[] coordArr= this.br.readLine().split(" ");
             this.from = new Coord(Integer.parseInt(coordArr[0]), Integer.parseInt(coordArr[1]));
             this.to = new Coord(Integer.parseInt(coordArr[2]), Integer.parseInt(coordArr[3]));
+
             int planetNum = Integer.parseInt(this.br.readLine());
+
 //            System.out.println("planetNum : " + planetNum);
             List<Planet> planetList = getPlanetListAsGivenNum(planetNum);
             System.out.println(getInOutNum(planetList));
@@ -47,6 +51,8 @@ public class Boj1004_230120 {
 
     public void init() throws IOException {
         this.testCase = Integer.parseInt(this.br.readLine());
+
+
     }
 
     public List<Planet> getPlanetListAsGivenNum(int planetNum) throws IOException {
@@ -67,8 +73,9 @@ public class Boj1004_230120 {
         int toOuter = 0;
 
         for (Planet planet : planetList) {
+            if(isIn(this.from, planet) && isIn(this.to, planet))continue; //같은 행성에 들어있는 경우
             if(isIn(this.from, planet))fromOuter++;
-            else if (isIn(this.to, planet))toOuter++;
+            if(isIn(this.to, planet))toOuter++;
         }
 
         return fromOuter + toOuter;
@@ -78,7 +85,7 @@ public class Boj1004_230120 {
         int leftX = (coord.x - planet.center.x);
         int leftY = (coord.y - planet.center.y);
 
-        int eqLeft= leftX*leftX + leftY  *leftY;
+        int eqLeft= (leftX*leftX) + (leftY*leftY);
         int eqRight = planet.radius * planet.radius;
 
         if(eqLeft < eqRight)return true;
