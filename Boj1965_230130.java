@@ -3,17 +3,20 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class Boj1965_230130 {
 
     private BufferedReader br;
     private int boxNum;
     private String[] boxSizeArr;
+    private static final int ASC = 1;
+    private static final int DESC = -1;
 
     public Boj1965_230130() throws IOException {
         this.br = new BufferedReader(new InputStreamReader(System.in));
         init();
-        System.out.println(getMaxBoxesNum());
+        System.out.println(getMaxBoxesNum(this.boxNum, this.boxSizeArr));
     }
 
     public void init() throws IOException {
@@ -22,47 +25,57 @@ public class Boj1965_230130 {
 
     }
 
-    public int getMaxBoxesNum() {
-        int maxBoxNum = 1;
-        int max = -1;
-        int startIdx = -1;
-        int prev = -1;
-        for(int i = 0; i < this.boxSizeArr.length - 1; i++){
-            if(Integer.parseInt(this.boxSizeArr[i]) < Integer.parseInt(this.boxSizeArr[i+1])){
-                max = Integer.parseInt(this.boxSizeArr[i]);
-                startIdx = i;
-                prev = max;
-                break;//시작점을 찾았으면 break한다.
+    public int getMaxBoxesNum(int boxNum, String[] boxSizeArr) {
+        List<Integer> leftParts = new ArrayList<>();
+        List<Integer> rightParts = new ArrayList<>();
+
+        leftParts.add(0);
+        rightParts.add(boxSizeArr.length - 1);
+        //가장 왼쪽이랑 가장 오른쪽은 left right part로 두는게 낫지 않을까요.
+
+        for (int i = 1; i < boxSizeArr.length - 1; i++) {
+            int current = Integer.parseInt(boxSizeArr[i]);
+            int next = Integer.parseInt(boxSizeArr[i + 1]);
+            //값이 아닌 idx를 넣어줘야 한다.
+            if (current < next) {
+                rightParts.add(i);
+            }else if(current > next){
+                leftParts.add(i);
             }
         }
-        if (max == -1) {
-            System.out.println("only descent...!");
-            return maxBoxNum; //계속 박스사이즈가 작아져도 마지막 한개는 넣을 수 있으므로 1을 return 해야한다.
-        }
 
-        List<Integer> boxSizeList = new ArrayList<>();
-        boxSizeList.add(prev);
+        System.out.println("left idx : " + leftParts);
+        System.out.println("right idx : " + rightParts);
 
-        System.out.println("start idx : " + startIdx);
-        System.out.println("start max : " + max);
-
-        for (int i = startIdx + 1; i < this.boxSizeArr.length; i++) {
-            //일단 prev보다 크다면 박스에 넣어버릴 수 있다.
-            int currentSize = Integer.parseInt(this.boxSizeArr[i]);
-            if(currentSize > prev){
-                if(boxSizeList.size() > 1 && boxSizeList.get(boxSizeList.size() - 1) > currentSize){
-                    boxSizeList.remove(boxSizeList.size() - 1);
-                }
-                //무조건 하나에서 시작한다. prev부터.
-                boxSizeList.add(currentSize);
-                prev = boxSizeList.get(boxSizeList.size() - 2);
+        int maxBoxesNum = 1;
+        for (int leftIdx : leftParts) {
+            for (int rightIdx : rightParts) {
+                int total = getTotalBoxNum(boxSizeArr, leftIdx, rightIdx);
+                if(total > maxBoxesNum)maxBoxesNum = total;
             }
-
         }
 
-
-        return  boxSizeList.size();
+        return maxBoxesNum;
     }
+
+    public int getTotalBoxNum(String[] boxSizeArr, int startIdx, int endIdx){
+        System.out.println("start idx : " + startIdx);
+        System.out.println("end idx : " + endIdx);
+
+        if(startIdx >= endIdx)return 1;
+        int totalBoxNum = 1;
+        int max = Integer.parseInt(boxSizeArr[startIdx]);
+        for (int i = startIdx + 1; i <= endIdx; i++) {
+            //startIdx는 무조건 넣고시작
+            if (Integer.parseInt(boxSizeArr[i]) > max) {
+                max = Integer.parseInt(boxSizeArr[i]);
+                totalBoxNum++;
+            }
+        }
+
+        return totalBoxNum;
+    }
+
 
 
     public static void main(String[] args) throws IOException {
